@@ -10,4 +10,20 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder - Copy %284%29\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder - Copy %285%29\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder - Copy %286%29\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder - Copy %287%29\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder - Copy %288%29\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder - Copy %289%29\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiShop.DtoLayer\MultiShop.DtoLayer.csproj" />
+  </ItemGroup>
+
 </Project>
