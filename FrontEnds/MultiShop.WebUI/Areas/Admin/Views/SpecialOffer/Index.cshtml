@@ -1,4 +1,4 @@
-﻿@model List<ResultFeatureSliderDto>
+﻿@model List<ResultSpecialOfferDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -14,10 +14,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Öne Çıkan Alan Başlığı</th>
-                                <th>Öne Çıkan Alan Açıklaması</th>
-                                <th>Öne Çıkan Alan Resim Yolu</th>
-                                <th>Öne Çıkan Alan Durumu</th>
+                                <th>Spesiyal İndirim Başlığı</th>
+                                <th>Spesiyal İndirim Alt Başlığı</th>
                                 <th>Sil</th>
                                 <th>Güncelle</th>
                             </tr>
@@ -28,18 +26,16 @@
                                 count++;
                                 <tr>
                                     <th scope="row">@count</th>
-                                    <td>@item.FeatureSliderTitle</td>
-                                    <td>@item.FeatureSliderDescription</td>
-                                    <td>@item.FeatureSliderImageUrl</td>
-                                    <td>@item.FeatureSliderStatus</td>
-                                    <td><a href="/Admin/FeatureSlider/UpdateFeatureSlider/@item.FeatureSliderId" class="btn btn-warning">Güncelle</a></td>
-                                    <td><a href="/Admin/FeatureSlider/DeleteFeatureSlider/@item.FeatureSliderId" class="btn btn-danger">Sil</a></td>
+                                    <td>@item.SpecialOfferTitle</td>
+                                    <td>@item.SpecialOfferSubTitle</td>
+                                    <td><a href="/Admin/SpecialOffer/UpdateSpecialOffer/@item.SpecialOfferId" class="btn btn-warning">Güncelle</a></td>
+                                    <td><a href="/Admin/SpecialOffer/DeleteSpecialOffer/@item.SpecialOfferId" class="btn btn-danger">Sil</a></td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                <a href="/Admin/FeatureSlider/CreateFeatureSlider/" class="btn btn-primary">Öne Çıkan Alanı Ekle</a>
+                <a href="/Admin/SpecialOffer/CreateSpecialOffer/" class="btn btn-primary">Spesiyal İndirim Ekle</a>
             </div>
         </div>
     </div>
