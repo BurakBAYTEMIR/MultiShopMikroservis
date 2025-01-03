@@ -9,10 +9,13 @@
         <div class="col-md-12">
             <div class="chart-box">
                 <div class="bs-example" data-example-id="bordered-table">
-                    
+
                     <form method="post">
                         <label>Kategori Adı</label>
-                        <input type="text" class="form-control" asp-for="CategoryName"/>
+                        <input type="text" class="form-control" asp-for="CategoryName" />
+                        <br />
+                        <label>Kategori Resim Dosya Yolu</label>
+                        <input type="text" class="form-control" asp-for="CategoryImageUrl" />
                         <br />
                         <button class="btn btn-primary">Kategori Ekle</button>
                     </form>

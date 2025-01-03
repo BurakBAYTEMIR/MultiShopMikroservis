@@ -11,10 +11,12 @@
                 <div class="bs-example" data-example-id="bordered-table">
 
                     <form method="post">
-                        <label>Kategori Id</label>
-                        <input type="text" readonly class="form-control" asp-for="CategoryId" />
+                        <input type="hidden" readonly class="form-control" asp-for="CategoryId" />
                         <label>Kategori Adı</label>
                         <input type="text" class="form-control" asp-for="CategoryName" />
+                        <br />
+                        <label>Kategori Resim Yolu</label>
+                        <input type="text" class="form-control" asp-for="CategoryImageUrl" />
                         <br />
                         <button class="btn btn-primary">Kategori Güncelle</button>
                     </form>
