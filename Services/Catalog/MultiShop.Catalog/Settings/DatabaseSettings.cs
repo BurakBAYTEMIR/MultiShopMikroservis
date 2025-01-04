@@ -4,6 +4,7 @@
     {
         public string CategoryCollectionName { get; set; }
         public string ProductCollectionName { get; set; }
+        public string AboutCollectionName { get; set; }
         public string ProductDetailCollectionName { get; set; }
         public string ProductImageCollectionName { get; set; }
         public string ConnectionString { get; set; }

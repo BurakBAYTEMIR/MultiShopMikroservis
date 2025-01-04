@@ -1,0 +1,45 @@
+﻿@model List<ResultAboutDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hakkımda Açıklaması</th>
+                                <th>Hakkımda Adresi</th>
+                                <th>Hakkımda Telefon Numarası</th>
+                                <th>Hakkımda Email</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.AboutDescription</td>
+                                    <td>@item.AboutAddress</td>
+                                    <td>@item.AboutPhone</td>
+                                    <td>@item.AboutEmail</td>
+                                    <td><a href="/Admin/About/UpdateAbout/@item.AboutId" class="btn btn-warning">Güncelle</a></td>
+                                    <td><a href="/Admin/About/DeleteAbout/@item.AboutId" class="btn btn-danger">Sil</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.Count < 1)
+                {
+                    <a href="/Admin/About/CreateAbout/" class="btn btn-primary">Hakkımda Ekle</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
