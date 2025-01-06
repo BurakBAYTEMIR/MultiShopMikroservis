@@ -5,7 +5,8 @@ using MultiShop.Catalog.Services.ProductImageServices;
 
 namespace MultiShop.Catalog.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductImagesController : ControllerBase
@@ -50,6 +51,13 @@ namespace MultiShop.Catalog.Controllers
         {
             await _productImageService.UpdateProductImageAsync(updateProductImageDto);
             return Ok("Kategori resmi başarıyla güncellendi");
+        }
+
+        [HttpGet("ProductImagesByProductId")]
+        public async Task<IActionResult> ProductImagesByProductId(string id)
+        {
+            var values = await _productImageService.GetByProductIdProductImageAsync(id);
+            return Ok(values);
         }
     }
 }
