@@ -22,22 +22,7 @@ namespace MultiShop.WebUI.ViewComponents.ProductDetailViewComponents
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<GetByIdProductImageDto>(jsonData);
-                if (values != null)
-                {
-                    return View(values);
-                }
-                else
-                {
-                    return View(new GetByIdProductImageDto
-                    {
-                        Image1 = "https://tesorogold.ru/local/templates/tesoro/images/no_photo.png",
-                        Image2 = "https://tesorogold.ru/local/templates/tesoro/images/no_photo.png",
-                        Image3 = "https://tesorogold.ru/local/templates/tesoro/images/no_photo.png",
-                        Image4 = "https://tesorogold.ru/local/templates/tesoro/images/no_photo.png",
-                        ProductId = id
-
-                    });
-                }
+                return View(values);
             }
             return View();
         }
