@@ -4,7 +4,7 @@ using MultiShop.Catalog.Dtos.FeatureDtos;
 using MultiShop.Catalog.Entities;
 using MultiShop.Catalog.Settings;
 
-namespace MultiShop.Catalog.Services.FeatureSevices
+namespace MultiShop.Catalog.Services.FeatureServices
 {
     public class FeatureService : IFeatureService
     {

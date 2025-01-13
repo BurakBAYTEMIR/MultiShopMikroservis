@@ -1,6 +1,6 @@
-﻿using MultiShop.Catalog.Dtos.FeatureDtos;
+﻿using MultiShop.DtoLayer.CatalogDtos.FeatureDtos;
 
-namespace MultiShop.Catalog.Services.FeatureSevices
+namespace MultiShop.WebUI.Services.CatalogServices.FeatureServices
 {
     public interface IFeatureService
     {
@@ -8,6 +8,6 @@ namespace MultiShop.Catalog.Services.FeatureSevices
         Task CreateFeatureAsync(CreateFeatureDto createFeatureDto);
         Task UpdateFeatureAsync(UpdateFeatureDto updateFeatureDto);
         Task DeleteFeatureAsync(string id);
-        Task<GetByIdFeatureDto> GetByIdFeatureAsync(string id);
+        Task<UpdateFeatureDto> GetByIdFeatureAsync(string id);
     }
 }

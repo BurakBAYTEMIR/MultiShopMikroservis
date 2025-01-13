@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.FeatureDtos;
-using Newtonsoft.Json;
-using System.Text;
+using MultiShop.WebUI.Services.CatalogServices.FeatureServices;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
@@ -9,104 +8,120 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     [Route("Admin/Feature")]
     public class FeatureController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IFeatureService _featureService;
 
-        public FeatureController(IHttpClientFactory httpClientFactory)
+        public FeatureController(IFeatureService featureService)
         {
-            _httpClientFactory = httpClientFactory;
+            _featureService = featureService;
         }
 
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
-            ViewBag.v1Title = "Öne Çıkan Alan Listesi";
-            ViewBag.v2PageName = "Ana Sayfa";
-            ViewBag.v3SectionName = "Öne Çıkan Alan";
-            ViewBag.v4SubSectionName = "Öne Çıkan Alan İşlemleri";
-
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7070/api/Features");
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultFeatureDto>>(jsonData);
+                ViewBag.v1Title = "Öne Çıkan Alan Listesi";
+                FeatureViewbagList();
+
+                var values = await _featureService.GetAllFeatureAsync();
                 return View(values);
             }
-            return View();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
         }
 
         [HttpGet]
         [Route("CreateFeature")]
         public IActionResult CreateFeature()
         {
-            ViewBag.v1Title = "Yeni Öne Çıkan Alan Girişi";
-            ViewBag.v2PageName = "Ana Sayfa";
-            ViewBag.v3SectionName = "Öne Çıkan Alan";
-            ViewBag.v4SubSectionName = "Öne Çıkan Alan İşlemleri";
+            try
+            {
+                ViewBag.v1Title = "Yeni Öne Çıkan Alan Girişi";
+                FeatureViewbagList();
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
         }
 
         [HttpPost]
         [Route("CreateFeature")]
         public async Task<IActionResult> CreateFeature(CreateFeatureDto createFeatureDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createFeatureDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7070/api/Features", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
+                await _featureService.CreateFeatureAsync(createFeatureDto);
                 return RedirectToAction("Index", "Feature", new { area = "Admin" });
             }
-            return View();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
         }
 
         [Route("DeleteFeature/{id}")]
         public async Task<IActionResult> DeleteFeature(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7070/api/Features?id=" + id);
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
+                await _featureService.DeleteFeatureAsync(id);
                 return RedirectToAction("Index", "Feature", new { area = "Admin" });
             }
-            return View();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
         }
 
         [HttpGet]
         [Route("UpdateFeature/{id}")]
         public async Task<IActionResult> UpdateFeature(string id)
         {
-            ViewBag.v1Title = "Öne Çıkan Alan Güncelleme Sayfası";
-            ViewBag.v2PageName = "Ana Sayfa";
-            ViewBag.v3SectionName = "Öne Çıkan Alan";
-            ViewBag.v4SubSectionName = "Öne Çıkan Alan İşlemleri";
-
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7070/api/Features/" + id);
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateFeatureDto>(jsonData);
+                ViewBag.v1Title = "Öne Çıkan Alan Güncelleme Sayfası";
+                FeatureViewbagList();
+
+                var values = await _featureService.GetByIdFeatureAsync(id);
                 return View(values);
             }
-            return View();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
         }
 
         [HttpPost]
         [Route("UpdateFeature/{id}")]
         public async Task<IActionResult> UpdateFeature(UpdateFeatureDto updateFeatureDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateFeatureDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7070/api/Features/", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
+                await _featureService.UpdateFeatureAsync(updateFeatureDto);
                 return RedirectToAction("Index", "Feature", new { area = "Admin" });
             }
-            return View();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
+        }
+
+        void FeatureViewbagList()
+        {
+            ViewBag.v2PageName = "Ana Sayfa";
+            ViewBag.v3SectionName = "Öne Çıkan Alan";
+            ViewBag.v4SubSectionName = "Öne Çıkan Alan İşlemleri";
         }
     }
 }

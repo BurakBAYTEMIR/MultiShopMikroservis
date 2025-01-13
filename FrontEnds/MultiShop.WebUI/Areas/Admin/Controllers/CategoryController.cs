@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
@@ -11,23 +8,21 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     [Route("Admin/Category")]
     public class CategoryController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(IHttpClientFactory httpClientFactory, ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
-            _httpClientFactory = httpClientFactory;
             _categoryService = categoryService;
         }
 
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
-            ViewBag.v1Title = "Kategori Listesi";
-            CategoryViewbagList();
-
             try
             {
+                ViewBag.v1Title = "Kategori Listesi";
+                CategoryViewbagList();
+
                 var values = await _categoryService.GetAllCategoryAsync();
                 return View(values);
             }
@@ -42,10 +37,18 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [Route("CreateCategory")]
         public IActionResult CreateCategory()
         {
-            ViewBag.v1Titlee = "Yeni Kategori Girişi";
-            CategoryViewbagList();
+            try
+            {
+                ViewBag.v1Titlee = "Yeni Kategori Girişi";
+                CategoryViewbagList();
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                return View();
+            }
         }
 
         [HttpPost]
@@ -83,11 +86,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [Route("UpdateCategory/{id}")]
         public async Task<IActionResult> UpdateCategory(string id)
         {
-            ViewBag.v1Titlee = "Kategori Güncelleme Sayfası";
-            CategoryViewbagList();
-
             try
             {
+                ViewBag.v1Titlee = "Kategori Güncelleme Sayfası";
+                CategoryViewbagList();
+
                 var values = await _categoryService.GetByIdCategoryAsync(id);
                 return View(values);
             }

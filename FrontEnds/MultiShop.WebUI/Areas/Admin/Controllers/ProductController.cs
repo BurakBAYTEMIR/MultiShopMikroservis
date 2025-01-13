@@ -10,12 +10,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     [Route("Admin/Product")]
     public class ProductController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
-        public ProductController(IHttpClientFactory httpClientFactory, ICategoryService categoryService, IProductService productService)
+        public ProductController(ICategoryService categoryService, IProductService productService)
         {
-            _httpClientFactory = httpClientFactory;
             _categoryService = categoryService;
             _productService = productService;
         }
@@ -23,10 +21,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
-            ViewBag.v1Title = "Ürün Listesi";
-
             try
             {
+                ViewBag.v1Title = "Ürün Listesi";
+
                 var values = await _productService.GetAllProductAsync();
                 return View(values);
             }
@@ -40,11 +38,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [Route("ProductListWithCategory")]
         public async Task<IActionResult> ProductListWithCategory()
         {
-            ViewBag.v1Title = "Ürün Listesi";
-            ProductListWithCategoryViewbag();
-
             try
             {
+                ViewBag.v1Title = "Ürün Listesi";
+                ProductListWithCategoryViewbag();
+
                 var values = await _productService.GetProductWithCategoryAsync();
                 return View(values);
             }
@@ -75,10 +73,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [Route("CreateProduct")]
         public async Task<IActionResult> CreateProduct()
         {
-            ViewBag.v1Title = "Yeni Ürün Girişi";
-            ProductListWithCategoryViewbag();
             try
             {
+                ViewBag.v1Title = "Yeni Ürün Girişi";
+                ProductListWithCategoryViewbag();
+
                 var values = await _categoryService.GetAllCategoryAsync();
                 List<SelectListItem> categoryValues = (from x in values
                                                        select new SelectListItem
@@ -116,11 +115,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [Route("UpdateProduct/{id}")]
         public async Task<IActionResult> UpdateProduct(string id)
         {
-            ViewBag.v1Title = "Ürün Güncelleme Sayfası";
-            ProductListWithCategoryViewbag();
-
             try
             {
+                ViewBag.v1Title = "Ürün Güncelleme Sayfası";
+                ProductListWithCategoryViewbag();
+
                 var values1 = await _categoryService.GetAllCategoryAsync();
                 List<SelectListItem> categoryValues = (from x in values1
                                                        select new SelectListItem
