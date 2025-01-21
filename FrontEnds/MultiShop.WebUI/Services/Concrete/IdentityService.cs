@@ -40,8 +40,8 @@ namespace MultiShop.WebUI.Services.Concrete
 
             RefreshTokenRequest refreshTokenRequest = new()
             {
-                ClientId = _clientSettings.MultiShopAdminClient.ClientId,
-                ClientSecret = _clientSettings.MultiShopAdminClient.ClientSecret,
+                ClientId = _clientSettings.MultiShopManagerClient.ClientId,
+                ClientSecret = _clientSettings.MultiShopManagerClient.ClientSecret,
                 RefreshToken = refreshToken,
                 Address = discoveryEndPoint.TokenEndpoint
             };
@@ -52,18 +52,18 @@ namespace MultiShop.WebUI.Services.Concrete
             {
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.AccessToken,
+                    Name=OpenIdConnectParameterNames.AccessToken,
                     Value = token.AccessToken
                 },
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.RefreshToken,
+                    Name=OpenIdConnectParameterNames.RefreshToken,
                     Value = token.RefreshToken
                 },
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.ExpiresIn,
-                    Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
+                    Name=OpenIdConnectParameterNames.ExpiresIn,
+                    Value=DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
                 }
             };
 
@@ -79,6 +79,7 @@ namespace MultiShop.WebUI.Services.Concrete
 
         public async Task<bool> SignIn(SignInDto signInDto)
         {
+
             var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
                 Address = _serviceApiSettings.IdentityServerUrl,
@@ -128,7 +129,7 @@ namespace MultiShop.WebUI.Services.Concrete
                 new AuthenticationToken
                 {
                     Name = OpenIdConnectParameterNames.ExpiresIn,
-                    Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
+                    Value=DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
                 }
             });
 

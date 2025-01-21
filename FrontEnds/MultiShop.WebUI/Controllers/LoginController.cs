@@ -70,7 +70,7 @@ namespace MultiShop.WebUI.Controllers
             //}
             #endregion 
             await _identityService.SignIn(signInDto);
-            return RedirectToAction("Index", "Category", new { area = "Admin" });
+            return RedirectToAction("Index", "User");
         }
     }
 }
