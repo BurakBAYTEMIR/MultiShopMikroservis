@@ -22,8 +22,8 @@
     <div class="row px-xl-5">
         @await Component.InvokeAsync("_ShoppingCartProductListComponentPartial")
 
-        @await Component.InvokeAsync("_ShoppingCartDiscountComponentPartial")
-
+        @* @await Component.InvokeAsync("_ShoppingCartDiscountComponentPartial") *@
+        @await Html.PartialAsync("~/Views/Discount/ConfirmDiscountCoupon.cshtml");
     </div>
 </div>
 <!-- Cart End -->
