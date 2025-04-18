@@ -18,7 +18,7 @@ namespace MultiShop.Order.Application.Features.Mediator.Handlers.OrderingHandler
         {
             await _repository.CreateAsync(new Ordering
             {
-                OrederDate = request.OrederDate,
+                OrderDate = request.OrderDate,
                 TotalPrice = request.TotalPrice,
                 UserId = request.UserId
             });
