@@ -10,5 +10,6 @@
         public string CargoCustomerDistrict { get; set; }
         public string CargoCustomerCity { get; set; }
         public string CargoCustomerAddress { get; set; }
+        public string UserCustomerId { get; set; }
     }
 }
