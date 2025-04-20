@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CommentDtos;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
 
 namespace MultiShop.WebUI.Controllers
 {
@@ -27,7 +24,7 @@ namespace MultiShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto,string id)
+        public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto, string id)
         {
             //createCommentDto.UserCommentImageUrl = "/image/nophoto.png";
             //createCommentDto.UserCommentRating = 2;
