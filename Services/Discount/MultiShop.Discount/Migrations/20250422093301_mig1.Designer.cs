@@ -12,7 +12,7 @@ using MultiShop.Discount.Context;
 namespace MultiShop.Discount.Migrations
 {
     [DbContext(typeof(DapperContext))]
-    [Migration("20241218121348_mig1")]
+    [Migration("20250422093301_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace MultiShop.Discount.Migrations
                     b.Property<int>("CouponRate")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CouponValidate")
+                    b.Property<DateTime>("CouponValidDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CouponId");

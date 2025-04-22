@@ -18,7 +18,7 @@ namespace MultiShop.Discount.Migrations
                     CouponCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CouponRate = table.Column<int>(type: "int", nullable: false),
                     CouponIsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CouponValidate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CouponValidDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
